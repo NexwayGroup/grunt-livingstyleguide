@@ -6,7 +6,6 @@ Easily create living style guides/front-end style guides/pattern libraries by ad
 ## Install
 
 First you have to install the livingstyleguide gem:
-I recommend version > 1.0.4
 
 ```shell
 gem install livingstyleguide

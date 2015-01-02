@@ -25,7 +25,6 @@ var grunt = require('grunt');
 exports.livingstyleguide = {
 
   setUp: function (done) {
-    // setup here if necessary
     done();
   },
   inputConfig: function (test) {
@@ -44,14 +43,14 @@ exports.livingstyleguide = {
     test.equal(actual, expected, 'config file should not exist.');
 
     test.done();
-  // },
-  // outputFile: function (test) {
-  //   test.expect(1);
+  },
+  outputFile: function (test) {
+    test.expect(1);
 
-  //   var actual = grunt.file.read('tmp/styleguide.html');
-  //   var expected = grunt.file.read('test/expected/styleguide.html');
-  //   test.equal(actual, expected, 'should be the same as test/expected/styleguide.html');
+    var actual = grunt.file.read('tmp/test.html');
+    var expected = grunt.file.read('test/expected/styleguide.html');
+    test.equal(actual, expected, 'should be the same as test/expected/styleguide.html');
 
-  //   test.done();
+    test.done();
   }
 };

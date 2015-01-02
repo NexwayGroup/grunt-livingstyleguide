@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       generate: {
         options: {
           src: 'test/fixtures/styleguide.lsg',
-          dest: 'tmp/styleguide.html'
+          dest: 'tmp/test.html'
         }
       }
     },
