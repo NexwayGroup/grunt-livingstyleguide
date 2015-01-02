@@ -10,8 +10,8 @@
 
 'use strict';
 
-var path = require('path'),
-   which = require('which');
+var path  = require('path'),
+    which = require('which');
 
 module.exports = function (grunt) {
 
@@ -22,12 +22,12 @@ module.exports = function (grunt) {
   grunt.registerMultiTask(MODULE_NAME, MODULE_DESC, function () {
 
     // Merge task-specific and/or target-specific options with these defaults.
-    var done = this.async(),
-      options = this.options({
-        dest: 'docs/styleguide.html'
-      }),
-      commmand = 'livingstyleguide',
-      compile = 'compile';
+    var done     = this.async(),
+        options  = this.options({
+          dest: 'docs/styleguide.html'
+        }),
+        commmand = 'livingstyleguide',
+        compile  = 'compile';
 
     // Check if the livingstyleguide is installed
     try {
@@ -39,24 +39,14 @@ module.exports = function (grunt) {
       );
     }
 
-    // Check if config file exist with '.lsg' extension
-    if (options.src && path.extname(options.src) === '.lsg') {
-    } else {
-      return grunt.log.error(
-        NEW_LINE + 'You must provide a source path to your livingstyleguide config file. (ex. "styleguide.lsg")' + NEW_LINE
-      );
-    }
-
-     // Make sure config file exists
-    if (!grunt.file.exists(options.src)) {
-      return grunt.log.error('Config file "' + options.src + '" not found.');
+     // Make sure config file exists with '.lsg' extension
+    if (!grunt.file.exists(options.src) && path.extname(options.src)  !== '.lsg') {
+      return grunt.log.error('Config file "' + options.src + '" not found or incorrect extension (ex. "styleguide.lsg").');
     }
 
     // Check if destination path was set with '.html' extension
     if (options.dest) {
-      var isExt = path.extname(options.dest);
-
-      if (isExt !== '.html') {
+      if (path.extname(options.dest) !== '.html') {
         return grunt.log.error(
           NEW_LINE + 'You must provide an extension (html) of the destination path to your livingstyleguide (ex. "styleguide.html")' + NEW_LINE
         );
@@ -73,7 +63,6 @@ module.exports = function (grunt) {
       opts: {stdio: 'inherit'}
     }, function (err, result, code) {
       done(err);
-      done();
     });
 
   });
