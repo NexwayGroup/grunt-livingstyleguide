@@ -1,9 +1,11 @@
 /*
  * grunt-livingstyleguide
- * http://master.nexwai.pl/~damian
+ * https://github.com/NexwayGroup/grunt-livingstyleguide
  *
- * Copyright (c) 2014 Damian Duda
+ * Copyright (c) 2015 Nexway Lab.
  * Licensed under the MIT license.
+ *
+ * @author Damian Duda <dduda@nexway.com>
  */
 
 'use strict';

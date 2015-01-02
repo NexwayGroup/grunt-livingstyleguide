@@ -33,14 +33,13 @@ module.exports = function (grunt) {
     try {
       which.sync('livingstyleguide');
     } catch (err) {
-      return grunt.error(
-        '\nYou need to have livingstyleguide installed and in your PATH for this task to work.\n' +
-          '\nsudo gem install livingstyleguide\n'
+      return grunt.log.error(
+        NEW_LINE +'You need to have livingstyleguide installed and in your PATH for this task to work.' + NEW_LINE + 'sudo gem install livingstyleguide' + NEW_LINE
       );
     }
 
      // Make sure config file exists with '.lsg' extension
-    if (!grunt.file.exists(options.src) && path.extname(options.src)  !== '.lsg') {
+    if (!grunt.file.exists(options.src) || path.extname(options.src)  !== '.lsg') {
       return grunt.log.error('Config file "' + options.src + '" not found or incorrect extension (ex. "styleguide.lsg").');
     }
 
@@ -48,22 +47,33 @@ module.exports = function (grunt) {
     if (options.dest) {
       if (path.extname(options.dest) !== '.html') {
         return grunt.log.error(
-          NEW_LINE + 'You must provide an extension (html) of the destination path to your livingstyleguide (ex. "styleguide.html")' + NEW_LINE
+          NEW_LINE + 'You must provide correct extension (html) of the destination path to your livingstyleguide (ex. "styleguide.html")' + NEW_LINE
         );
       }
 
       grunt.file.write(options.dest);
     }
 
-    grunt.log.writeln('Compiling... ' + NEW_LINE + commmand + ' ' + compile + ' ' + options.src + ' ' +  options.dest + '');
+    grunt.log.writeln('\'' + commmand + ' ' + compile + ' ' + options.src + ' ' +  options.dest + '\'');
 
-    grunt.util.spawn({
+    var livingProcess = {
       cmd: commmand,
-      args: [compile, options.src, options.dest],
-      opts: {stdio: 'inherit'}
-    }, function (err, result, code) {
-      done(err);
-    });
+      args: [compile, options.src, options.dest]
+    };
+
+    function livingDone(error, result, code) {
+      if (result.stdout) {
+        grunt.log.ok(String(result));
+      }
+      if (error) {
+        return done(error);
+      } else {
+        return done();
+      }
+    }
+
+    // Run livingstyleguide
+    grunt.util.spawn(livingProcess, livingDone);
 
   });
 
