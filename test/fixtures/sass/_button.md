@@ -1,0 +1,10 @@
+Buttons
+=======
+
+```
+<button class="button">Example button</button>
+```
+
+```
+<button class="button-primary">Example button</button>
+```
