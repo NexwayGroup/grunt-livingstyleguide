@@ -11,7 +11,6 @@
 'use strict';
 
 var path = require('path'),
-   spawn = require('win-spawn'),
    which = require('which');
 
 module.exports = function (grunt) {
@@ -22,69 +21,59 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask(MODULE_NAME, MODULE_DESC, function () {
 
+    // Merge task-specific and/or target-specific options with these defaults.
     var done = this.async(),
-      options = this.options(),
-      files = this.files,
-      cmd = options.terminal || 'livingstyleguide compile',
-      configPath;
+      options = this.options({
+        dest: 'docs/styleguide.html'
+      }),
+      commmand = 'livingstyleguide',
+      compile = 'compile';
 
     // Check if the livingstyleguide is installed
     try {
       which.sync('livingstyleguide');
     } catch (err) {
-      return grunt.warn(
+      return grunt.error(
         '\nYou need to have livingstyleguide installed and in your PATH for this task to work.\n' +
           '\nsudo gem install livingstyleguide\n'
       );
     }
 
-    this.files.forEach(function (file) {
+    // Check if config file exist with '.lsg' extension
+    if (options.src && path.extname(options.src) === '.lsg') {
+    } else {
+      return grunt.log.error(
+        NEW_LINE + 'You must provide a source path to your livingstyleguide config file. (ex. "styleguide.lsg")' + NEW_LINE
+      );
+    }
 
-      var destPath = '';
+     // Make sure config file exists
+    if (!grunt.file.exists(options.src)) {
+      return grunt.log.error('Config file "' + options.src + '" not found.');
+    }
 
-      // Check if config file exists with '.lsg' extension
-      if (file.src && path.extname(file.src) === '.lsg') {
-        configPath = file.src;
-      } else {
-        return grunt.log.warn(
-          NEW_LINE + 'You must provide a source path to your livingstyleguide config file. (ex. "styleguide.lsg")' + NEW_LINE
+    // Check if destination path was set with '.html' extension
+    if (options.dest) {
+      var isExt = path.extname(options.dest);
+
+      if (isExt !== '.html') {
+        return grunt.log.error(
+          NEW_LINE + 'You must provide an extension (html) of the destination path to your livingstyleguide (ex. "styleguide.html")' + NEW_LINE
         );
       }
 
-      // Check if destination path was set with '.html' extension
-      if (file.dest) {
-        destPath = file.dest;
-        var isExt = path.extname(destPath);
+      grunt.file.write(options.dest);
+    }
 
-        if (isExt !== '.html') {
-          return grunt.log.warn(
-            NEW_LINE + 'You must provide an extension (html) of the destination path to your livingstyleguide (ex. "styleguide.html")' + NEW_LINE
-          );
-        }
+    grunt.log.writeln('Compiling... ' + NEW_LINE + commmand + ' ' + compile + ' ' + options.src + ' ' +  options.dest + '');
 
-        grunt.file.write(destPath);
-      }
-
-      // Run livingstyleguide
-      var cp = spawn(cmd, [configPath, destPath], {stdio: 'inherit'});
-
-      grunt.log.writeln('Compiling... ' + NEW_LINE + cmd + ' ' + configPath + ' ' +  destPath + '');
-
-      cp.on('error', function (err) {
-        done(err);
-      });
-
-      cp.on('close', function (code) {
-        if (code > 0) {
-          done(new Error('Exited with error code ' + code));
-          grunt.log.warn(
-            NEW_LINE + 'try "git init"' + NEW_LINE
-          );
-        } else {
-          done();
-        }
-      });
-
+    grunt.util.spawn({
+      cmd: commmand,
+      args: [compile, options.src, options.dest],
+      opts: {stdio: 'inherit'}
+    }, function (err, result, code) {
+      done(err);
+      done();
     });
 
   });

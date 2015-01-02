@@ -1,6 +1,7 @@
 # grunt-livingstyleguide
 
-> Generate Livingstyleguide with Grunt. Easily create living style guides/front-end style guides/pattern libraries by adding Markdown documentation to your Sass project.
+> Generate Livingstyleguide with Grunt. 
+Easily create living style guides/front-end style guides/pattern libraries by adding Markdown documentation to your Sass project.
 
 ## Install
 
@@ -38,7 +39,9 @@ In your project's Gruntfile, add a section named `livingstyleguide` to the data 
 grunt.initConfig({
   livingstyleguide: {
     generate: {
-      files: 'test/fixtures/styleguide.lsg'
+      options: {
+        src: 'test/fixtures/styleguide.lsg'
+      }
     }
   },
 })
@@ -59,12 +62,6 @@ Default value: `styleguide.html`
 
 The path to your destination file.
 
-#### options.terminal
-Type: `String`
-*Optional*
-
-The path to your livingstyleguide binary installation.
-
 ### Usage Examples
 
 #### Default Options
@@ -73,10 +70,10 @@ The path to your livingstyleguide binary installation.
 grunt.initConfig({
   livingstyleguide: {
     generate: {
-      files: [{
+      options: {
         src: 'test/fixtures/styleguide.lsg',
         dest: 'tmp/styleguide.html'
-      }]
+      }
     }
   },
 })

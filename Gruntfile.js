@@ -34,10 +34,10 @@ module.exports = function (grunt) {
     // Configuration to be run (and then tested).
     livingstyleguide: {
       generate: {
-        files: [{
-            src: 'test/fixtures/styleguide.lsg',
-            dest: 'tmp/test.html'
-        }]
+        options: {
+          src: 'test/fixtures/styleguide.lsg',
+          dest: 'tmp/styleguide.html'
+        }
       }
     },
 

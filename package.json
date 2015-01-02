@@ -45,7 +45,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "which": "^1.0.8",
-    "win-spawn": "^2.0.0"
+    "which": "^1.0.8"
   }
 }
