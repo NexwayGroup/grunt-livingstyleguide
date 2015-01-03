@@ -1,6 +1,6 @@
 {
   "name": "grunt-livingstyleguide",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Easily create living style guides/front-end style guides/pattern libraries by adding Markdown documentation to your Sass project.",
   "homepage": "https://github.com/NexwayGroup/grunt-livingstyleguide",
   "repository": {
