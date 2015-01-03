@@ -17,6 +17,7 @@
   },
   "keywords": [
     "grunt",
+    "gruntplugin",
     "livingstyleguide",
     "styleguide",
     "scss",
