@@ -1,9 +1,9 @@
 # grunt-livingstyleguide
 
-> Generate Livingstyleguide with Grunt. 
+> Generate Livingstyleguide with Grunt.    
 Easily create living style guides/front-end style guides/pattern libraries by adding Markdown documentation to your Sass project.
 
-## Install
+## Style Guide Setup
 
 First you have to install the livingstyleguide gem:
 
@@ -11,7 +11,6 @@ First you have to install the livingstyleguide gem:
 gem install livingstyleguide
 ```
 
-## Style Guide Workshop 
 [Livingstyleguide workshop](https://github.com/hagenburger/livingstyleguide-workshop)
 
 ## Getting Started
@@ -49,15 +48,15 @@ grunt.initConfig({
 ### Options
 
 #### options.src
-Type: `String`
-*Required*
+Type: `String`   
+**Required*
 
 The path to your livingstyleguide config file.
 
 #### options.dest
-Type: `String`
-Default value: `styleguide.html`
-*Optional*
+Type: `String`   
+Default value: `styleguide.html`   
+**Optional*
 
 The path to your destination file.
 
