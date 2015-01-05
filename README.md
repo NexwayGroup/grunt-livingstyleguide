@@ -1,6 +1,6 @@
-# grunt-livingstyleguide
+# grunt-livingstyleguide   [![Build Status](https://travis-ci.org/NexwayGroup/grunt-livingstyleguide.svg?branch=master)](https://travis-ci.org/NexwayGroup/grunt-livingstyleguide)
 
-> Generate Livingstyleguide with Grunt.    
+> Generate livingstyleguide with Grunt.    
 Easily create living style guides/front-end style guides/pattern libraries by adding Markdown documentation to your Sass project.
 
 ## Style Guide Setup
