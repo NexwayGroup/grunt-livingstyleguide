@@ -16,14 +16,7 @@
     "url": "https://github.com/NexwayGroup/grunt-livingstyleguide/issues"
   },
   "keywords": [
-    "gruntplugin",
-    "grunt",
-    "livingstyleguide",
-    "styleguide",
-    "markdown",
-    "scss",
-    "sass",
-    "css"
+    "gruntplugin"
   ],
   "main": "Gruntfile.js",
   "engines": {
